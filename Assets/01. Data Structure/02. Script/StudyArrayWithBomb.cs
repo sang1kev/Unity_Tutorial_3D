@@ -38,7 +38,7 @@ public class StudyArrayWithBomb : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             Rigidbody rb = colliders[i].GetComponent<Rigidbody>();
-            rb.AddExplosionForce(500f, transform.position, bombRange, 1f);
+            rb.AddExplosionForce(250f, transform.position, bombRange, 1f);
         }
     }
 }
