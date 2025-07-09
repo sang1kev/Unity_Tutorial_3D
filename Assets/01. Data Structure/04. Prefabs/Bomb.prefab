@@ -245,8 +245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombShape
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 8499396357378085801, guid: 76c7290c9e00010418ece3ee13a38951, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 6121130469909904258, guid: 76c7290c9e00010418ece3ee13a38951, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76c7290c9e00010418ece3ee13a38951, type: 3}

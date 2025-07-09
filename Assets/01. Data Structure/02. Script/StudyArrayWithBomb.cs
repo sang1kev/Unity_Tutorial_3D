@@ -15,8 +15,8 @@ public class StudyArrayWithBomb : MonoBehaviour
 
     void Awake()
     {
-        bombTf = transform.GetChild(0);
-        bombParticle = transform.GetChild(1);
+        bombTf = transform.GetChild(1);
+        bombParticle = transform.GetChild(0);
 
         bombRB = GetComponent<Rigidbody>();
     }
@@ -38,7 +38,7 @@ public class StudyArrayWithBomb : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             Rigidbody rb = colliders[i].GetComponent<Rigidbody>();
-            rb.AddExplosionForce(250f, transform.position, bombRange, 1f);
+            rb.AddExplosionForce(500f, transform.position, bombRange, 1f);
         }
     }
 }
