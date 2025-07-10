@@ -8,13 +8,13 @@ public class TowerBar : MonoBehaviour
     public BarType bartype;
 
     public Stack<GameObject> barStack = new Stack<GameObject>();
+    [SerializeField] private HanoiTowerManager hanoiManager;
 
     void OnMouseDown()
     {
         if (!HanoiTowerManager.isTorusSel)
         {
             HanoiTowerManager.selTorus = PopTorus();
-            HanoiTowerManager.isTorusSel = true;
         }
         else
         {
@@ -25,9 +25,16 @@ public class TowerBar : MonoBehaviour
     public void PushTorus(GameObject torus)
     {
         if (!CheckHanoiRule(torus))
+        {
+            StartCoroutine(hanoiManager.TextWarning());
             return;
+        }
 
+        HanoiTowerManager.moveCount++;
         HanoiTowerManager.isTorusSel = false;
+        HanoiTowerManager.selTorus = null;
+
+        hanoiManager.TextCount();
 
         torus.transform.position = transform.position + Vector3.up * 2.25f;
         torus.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
@@ -38,9 +45,16 @@ public class TowerBar : MonoBehaviour
 
     public GameObject PopTorus()
     {
-        GameObject torus = barStack.Pop();
+        if (barStack.Count > 0)
+        {
+            HanoiTowerManager.currBar = this;
+            HanoiTowerManager.isTorusSel = true;
+            GameObject torus = barStack.Pop();
 
-        return torus;
+            return torus;
+        }
+
+        return null;
     }
 
     private bool CheckHanoiRule(GameObject torus)
