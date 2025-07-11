@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HanoiTowerManager : MonoBehaviour
 {
@@ -12,11 +14,17 @@ public class HanoiTowerManager : MonoBehaviour
 
     public static GameObject selTorus;
     public static TowerBar currBar;
-    public  TextMeshProUGUI textCount;
-    public  TextMeshProUGUI textWarning;
+    public TextMeshProUGUI textCount;
+    public TextMeshProUGUI textWarning;
+    public Button hintButton;
     
     public static bool isTorusSel;
     public static int moveCount;
+
+    void Awake()
+    {
+        hintButton.onClick.AddListener(Hint);
+    }
 
     IEnumerator Start()
     {
@@ -60,5 +68,29 @@ public class HanoiTowerManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         textWarning.text = $"";
+    }
+
+    public void Hint()
+    {
+        if(bars[0].barStack.Count <= 0 && bars[1].barStack.Count <= 0)
+        {
+            HanoiHint((int)hanoiLevel, 0, 1, 2 );
+        }
+    }
+
+    public void HanoiHint(int n, int from, int temp, int goal)
+    {
+        if (n == 0)
+            return;
+
+        if (n == 1)
+            Debug.Log($"{n}번 도넛을 {from}에서 {goal}로 이동");
+        else
+        {
+            HanoiHint(n - 1, from, goal, temp);
+            Debug.Log($"{n}번 도넛을 {from}에서 {goal}로 이동");
+
+            HanoiHint(n - 1, temp, from, goal);
+        }
     }
 }

@@ -15,6 +15,7 @@ public class TowerBar : MonoBehaviour
         if (!HanoiTowerManager.isTorusSel)
         {
             HanoiTowerManager.selTorus = PopTorus();
+            HanoiTowerManager.moveCount++;
         }
         else
         {
@@ -30,7 +31,6 @@ public class TowerBar : MonoBehaviour
             return;
         }
 
-        HanoiTowerManager.moveCount++;
         HanoiTowerManager.isTorusSel = false;
         HanoiTowerManager.selTorus = null;
 
