@@ -35,7 +35,7 @@ public class BreadthFirstSearch : MonoBehaviour
             {
                 visited[index] = true;
                 Debug.Log($"{index}번 노드에 방문");
-
+                 
                 for (int i = 0; i < nodes.GetLength(0); i++)
                 {
                     if (nodes[index, i] == 1 && !visited[i])
