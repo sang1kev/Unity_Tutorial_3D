@@ -7,6 +7,7 @@ public class FPSPlayerShoot : MonoBehaviour
     public GameObject bombFactory;
 
     public float throwPower = 15f;
+    public float weaponPower = 5f;
 
     public GameObject bulletEffect;
     private ParticleSystem ps;
@@ -18,6 +19,9 @@ public class FPSPlayerShoot : MonoBehaviour
 
     void Update()
     {
+        if (FPSGameManager.Instance.gState == FPSGameManager.GameState.READY)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             // raycast collider 만 있어도 감지가능
@@ -26,12 +30,24 @@ public class FPSPlayerShoot : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                bulletEffect.transform.position = hitInfo.point;
-                bulletEffect.transform.forward = hitInfo.normal;
+                if (Physics.Raycast(ray, out hitInfo))
+                {
+                    if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) // Raycast를 Enemy가 맞은 경우
+                    {
+                        EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
+                        eFSM.HitEnemy(weaponPower);
+                    }
+                    else // Raycast를 맞은 대상이 Enemy가 아닌 경우
+                    {
+                        bulletEffect.transform.position = hitInfo.point;
+                        bulletEffect.transform.forward = hitInfo.normal;
 
-                ps.Play();
+                        ps.Play();
+                    }
+                }
             }
         }
+
         if (Input.GetMouseButtonDown(1)) // 마우스 오른쪽 버튼 클릭
         {
             GameObject bomb = Instantiate(bombFactory);
