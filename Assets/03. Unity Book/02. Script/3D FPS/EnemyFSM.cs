@@ -17,6 +17,7 @@ public class EnemyFSM : MonoBehaviour
     public float moveSpeed = 5f;
     public float moveDistance = 20f;
     private Vector3 originPos;
+    private Quaternion originRot;
 
     private float currTime = 0f;
     private float attackDelay = 2f;
@@ -32,6 +33,7 @@ public class EnemyFSM : MonoBehaviour
         player = GameObject.Find("Player").transform;
         cc = GetComponent<CharacterController>();
         originPos = transform.position;
+        originRot = transform.rotation;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -115,6 +117,11 @@ public class EnemyFSM : MonoBehaviour
             enemyFSM = EnemyState.MOVE;
             Debug.Log("상태 전환 : Attack -> Move");
         }
+    }
+
+    public void AttackAction()
+    {
+        player.GetComponent<FPSPlayerMove>().DamageAction(damage);
     }
 
     private void Return()
