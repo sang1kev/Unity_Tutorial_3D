@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class FPSGameManager : Singleton<FPSGameManager>
 {
-    public enum GameState { READY, RUN, GAMEOVER }
+    public enum GameState { Ready, Run, GameOver }
     public GameState gState;
 
     public GameObject gameLabel;
@@ -15,7 +14,7 @@ public class FPSGameManager : Singleton<FPSGameManager>
 
     void Start()
     {
-        gState = GameState.READY;
+        gState = GameState.Ready;
         gameText = gameLabel.GetComponent<TextMeshProUGUI>();
 
         gameText.text = "Ready...";
@@ -23,28 +22,30 @@ public class FPSGameManager : Singleton<FPSGameManager>
 
         player = GameObject.Find("Player").GetComponent<FPSPlayerMove>();
 
-        StartCoroutine(ReadyToStart());
+        StartCoroutine(ReadyToStart()); // Ready -> Run으로 전환되는 코루틴
     }
 
     void Update()
     {
         if (player.hp <= 0)
         {
+            player.GetComponentInChildren<Animator>().SetFloat("MoveMotion", 0f);
+            
             gameLabel.SetActive(true);
             gameText.text = "Game Over";
             gameText.color = new Color32(255, 0, 0, 255);
 
-            gState = GameState.GAMEOVER;
+            gState = GameState.GameOver;
         }
     }
 
     IEnumerator ReadyToStart()
     {
-        yield return new WaitForSeconds(2f);
-        gameText.text = "Go!";
+        yield return new WaitForSeconds(2f); // 2초 대기
+        gameText.text = "Go!"; // 텍스트 변경
 
         yield return new WaitForSeconds(0.5f);
         gameLabel.SetActive(false);
-        gState = GameState.RUN;
+        gState = GameState.Run; // 상태 전환
     }
 }
