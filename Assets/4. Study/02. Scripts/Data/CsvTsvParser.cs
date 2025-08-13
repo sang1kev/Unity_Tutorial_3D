@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class CsvTsvParser : MonoBehaviour
@@ -11,42 +9,44 @@ public class CsvTsvParser : MonoBehaviour
         public string charID;
         public string name;
         public int hp;
-        public int damage;
+        public int attack;
 
-        public CharacterData(string charID, string name, int hp, int damage)
+        public CharacterData(string charID, string name, int hp, int attack)
         {
             this.charID = charID;
             this.name = name;
             this.hp = hp;
-            this.damage = damage;
+            this.attack = attack;
         }
     }
-
+    
     public List<CharacterData> characters = new List<CharacterData>();
 
     void Start()
     {
-        //var dataFile = Resources.Load<TextAsset>("csvData");
-        var dataFile = Resources.Load<TextAsset>("tsvData");
+        var dataFile = Resources.Load<TextAsset>("CsvData");
+        // var dataFile = Resources.Load<TextAsset>("TsvData");
+        
         string data = dataFile.text;
 
-        ParsingCharData(data);
+        ParsingCharacterData(data);
     }
 
-    private void ParsingCharData(string data)
+    // 데이터를 데이터 클래스에 맞게 파싱하는 기능
+    private void ParsingCharacterData(string data)
     {
-        Debug.Log($"Data : {data}");
+        Debug.Log(data);
 
-        string[] rows = data.Split('\n');
-
+        string[] rows = data.Split('\n'); // lines
+        
         for (int i = 1; i < rows.Length; i++)
         {
-            //string[] cols = rows[i].Split(',');
-            string[] cols = rows[i].Split('\t');
+            string[] cols = rows[i].Split(',');
+            // string[] cols = rows[i].Split('\t');
 
-            CharacterData charData = new CharacterData(cols[0], cols[1], int.Parse(cols[2]), int.Parse(cols[3]));
-            
-            characters.Add(charData);
+            CharacterData characterData = new CharacterData(cols[0], cols[1], int.Parse(cols[2]), int.Parse(cols[3]));
+
+            characters.Add(characterData);
         }
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ObserverListner : MonoBehaviour, IObserver
 {
@@ -13,9 +13,12 @@ public class ObserverListner : MonoBehaviour, IObserver
     {
         subject.RemoveObserver(this);
     }
-
-    public void Notify(int num)
+    
+    public void Notify(int hp)
     {
-        Debug.Log("º¸½º ¸ó½ºÅÍ Ã³Ä¡");
+        if (hp <= 0)
+        {
+            Debug.Log("ë³´ìŠ¤ ëª¬ìŠ¤í„° ì²˜ì¹˜");
+        }
     }
 }

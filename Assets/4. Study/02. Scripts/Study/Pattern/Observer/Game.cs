@@ -1,3 +1,4 @@
+﻿using Pattern.Observer;
 using UnityEngine;
 
 namespace Pattern.Observer
@@ -9,7 +10,9 @@ namespace Pattern.Observer
             Player player = new Player();
 
             player.AddScore(100);
+            
             player.AddScore(500);
+            
             player.AddScore(1000);
         }
     }

@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Subject : MonoBehaviour, ISubject
 {
     public List<IObserver> Observers { get; set; }
-
+    
     public void AddObserver(IObserver observer)
     {
         Observers.Add(observer);
@@ -17,10 +17,9 @@ public class Subject : MonoBehaviour, ISubject
 
     public void NotifyObservers()
     {
-        int num = 0;
         foreach (var observer in Observers)
         {
-            observer.Notify(num);
+            observer.Notify(1);
         }
     }
 }

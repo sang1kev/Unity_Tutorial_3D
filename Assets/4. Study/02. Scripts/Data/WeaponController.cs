@@ -9,7 +9,7 @@ public class WeaponController : MonoBehaviour
     public string currWeaponName;
     public int currWeaponDmg;
     public int currWeaponRange;
-
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -30,7 +30,7 @@ public class WeaponController : MonoBehaviour
     {
         foreach (var weapon in weaponObjs)
             weapon.SetActive(false);
-
+        
         weaponObjs[index].SetActive(true);
 
         currWeaponName = weaponDatas[index].weaponName;
