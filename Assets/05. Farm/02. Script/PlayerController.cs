@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,12 +18,16 @@ public class PlayerController : MonoBehaviour
 
     private bool isSprint;
 
+    private bool isInvenOpen;
+
     private Vector3 velocity;
     private const float GRAVITY = -9.8f;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        int charIndex = LoadSceneManager.Instance.charIndex;
+        transform.GetChild(charIndex).gameObject.SetActive(true);
+        anim = transform.GetChild(charIndex).GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
     }
 
@@ -33,6 +38,12 @@ public class PlayerController : MonoBehaviour
         cc.Move(dir * Time.deltaTime);
         Turn();
         SetAnim();
+    }
+
+    private void OnInventory()
+    {
+        isInvenOpen = !isInvenOpen;
+        GameManager.Instance.ui.OpenInventory(isInvenOpen);
     }
 
     private void OnMove(InputValue inputValue)

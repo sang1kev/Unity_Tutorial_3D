@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44888ac86519094e8acb5cdecbb17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantIndex: 5
   isHarvest: 0
 --- !u!1 &2768498632495698476
 GameObject:

@@ -27,7 +27,7 @@ public class Fade : MonoBehaviour
 
     private void OnFade(float t, Color c, bool isFade, Action fadeEvent = null)
     {
-        StartCoroutine(FadeRout(t, c, isFade));
+        StartCoroutine(FadeRout(t, c, isFade, fadeEvent));
     }
 
     IEnumerator FadeRout(float t, Color c, bool isFade, Action fadeEvent = null)

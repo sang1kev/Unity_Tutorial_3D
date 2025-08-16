@@ -10,7 +10,7 @@ public class HouseEvent : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            houseTop.SetActive(false);
+            houseTop.transform.position += Vector3.up * 13f;
             GameManager.Instance.SetCamState(CameraState.HOUSE);
         }
     }
@@ -18,7 +18,7 @@ public class HouseEvent : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            houseTop.SetActive(true);
+            houseTop.transform.position += Vector3.up * -13f;
             GameManager.Instance.SetCamState(CameraState.OUTDOOR);
         }
     }

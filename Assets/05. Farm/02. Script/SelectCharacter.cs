@@ -21,7 +21,7 @@ public class SelectCharacter : MonoBehaviour
         turnButtons[0].onClick.AddListener(() => Turn(true));
         turnButtons[1].onClick.AddListener(() => Turn(false));
 
-        selectButton.onClick.AddListener(() => StartCoroutine(Select()));
+        selectButton.onClick.AddListener(Select);
 
         CharIndex = 0;
         isTurn = false;
@@ -76,15 +76,21 @@ public class SelectCharacter : MonoBehaviour
         }
     }
 
-    IEnumerator Select()
+    private void Select()
+    {
+        LoadSceneManager.Instance.SetCharIndex(CharIndex);
+
+        StartCoroutine(SelectRout());
+    }
+
+
+    IEnumerator SelectRout()
     {
         charAnim[CharIndex].SetTrigger("Select");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
-        Fade.onFadeAct?.Invoke(1f, Color.black, true, null);
-
-        yield return new WaitForSeconds(1.5f);
+        LoadSceneManager.Instance.OnLoadScene();
     }
 }
 

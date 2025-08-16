@@ -23,11 +23,11 @@ public class WeatherSystem : MonoBehaviour
             yield return new WaitForSeconds(15f);
 
             int weatherCount = Enum.GetValues(typeof(WeatherType)).Length;
-            Debug.Log(weatherCount);
 
             int ranIndex = Random.Range(0, weatherCount);
 
             weatherType = (WeatherType)ranIndex;
+            Debug.Log($"현재 날씨는 {weatherType}입니다.");
 
             foreach (var particle in weatherParticles)
                 particle.SetActive(false);
